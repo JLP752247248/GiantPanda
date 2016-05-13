@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	default-lazy-init="true" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop
+    	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
+          
+    <!-- 讓spring 去读取指定路径下的资源文件 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+      <property name="locations" value="classpath:jdbc.properties"/>
+    </bean>
+     
+    <!-- 數據源 -->
+	<bean id="myDatasource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">  
+		<!-- 连接驱动 -->
+		<property name="driverClassName" value="${jdbc.driverClassName}" />  
+		<!-- 连接url -->
+		<property name="url" value="${jdbc.url}" />  
+		<!-- 连接用户名 -->   
+		<property name="username" value="${jdbc.username}" />  
+		<!-- 连接密码   --> 
+		<property name="password" value="${jdbc.password}" />  
+		<!-- 自动flush -->
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+		
+	</bean>  
+
+     
+    <!-- 配置SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+      <property name="dataSource" ref="myDatasource" />
+      <property name="mappingResources">
+          <list>
+          </list>
+      </property>
+      <property name="hibernateProperties">
+        <props>
+                <prop key="hibernate.dialect">${dialect}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${show_sql}</prop>
+                <prop key="hibernate.format_sql">${format_sql}</prop>
+                <prop key="hibernate.use_sql_comments">${use_sql_comments}</prop>
+            </props>
+      </property>
+      <property name="useTransactionAwareDataSource" value="true"></property>
+      <property name="packagesToScan">
+			<list>
+				<value>com.panda.*.po.**</value>
+			</list>
+		</property>
+    </bean>
+    
+    <!-- 事务相关注解注入 -->
+  	<tx:annotation-driven transaction-manager="transactionManager" />
+     <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+    
+
+	<context:component-scan base-package="com.panda">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<context:annotation-config  />
+
+	<bean id="hibernateInterceptor" class="org.springframework.orm.hibernate3.HibernateInterceptor">
+        <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor" lazy-init="true" />
+
+
+	<!-- <bean id="lobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
+		<property name="nativeJdbcExtractor">
+			<ref bean="nativeJdbcExtractor" />
+		</property>
+
+	</bean> -->
+
+
+    <bean name="openSessionInViewInterceptor" class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+
+    
+	
+	
+	<aop:aspectj-autoproxy />
+          
+</beans>

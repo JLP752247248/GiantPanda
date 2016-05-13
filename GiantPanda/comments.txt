@@ -1,0 +1,3 @@
+后端框架：springMVC，springsecurity，Hibernate
+前端框架：angularjs，jQuery
+基础功能：注册，登录

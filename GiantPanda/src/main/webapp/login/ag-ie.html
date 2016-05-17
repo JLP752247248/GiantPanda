@@ -1,0 +1,87 @@
+<!doctype html>
+<html ng-app="myModel" xmlns:ng="http://angularjs.org">
+<head>
+		<meta charset="UTF-8">
+		
+		
+    	<script src="/GiantPanda/plugins/angular-1.4.0/angular.js"></script>
+    	<script src="/GiantPanda/plugins/restangular-1.4.0/restangular.min.js"></script>
+		<script src="/GiantPanda/plugins/lodash.js"></script>
+		
+		
+		
+	<title>主页</title>
+	</head>
+	<body>
+	<div ng-controller="TestController">
+		
+		<a href="#" ng-click="testangular()">testangular</a>
+		<a href="#" ng-click="addUser()">新增</a>
+	</div>
+	</body>
+	<script type="text/javascript">
+					
+	var model=angular.module('myModel', ['restangular']);
+	model.config(['$httpProvider', function($httpProvider) {
+		$httpProvider.defaults.headers.put['Content-Type'] = 'application/json';
+		$httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+		//$httpProvider.defaults.headers.post['Accept'] = 'application/json';
+		}]);
+	model.factory("myService1", ['Restangular', function(Restangular) {
+		 var UserList=Restangular.all("GiantPanda/restfulapi/userinfoctrl");
+		 return UserList;
+	}]);
+	model.controller('TestController',['$scope','$timeout',"myService1","$http", function($scope,$timeout,myService1,$http){
+		//var user=myService1.customGET("u1");
+		/*user.then(function(data){
+			data.post();
+		});*/
+		
+		/*$http({
+	         method:"POST",
+	         headers : { 'Content-Type': 'application/x-www-form-urlencoded' },
+	         url:"http://localhost:8080/SSSdemo/restfulapi/mytest/", 
+	         params:{"userName":"www","password":"234dd"}
+	     }).success(function(data) {
+	         console.log(data);
+	     }).error(function() {
+	         alert("fail...");
+	     });*/
+		//myService1.post({'userId':'u3','userName':'as'});
+		var user={userName:'as',userRoleList:[{userRoleId:'ur1'}]};
+		/*myService1.post(user).then(
+				function(){
+					
+				}
+		);*/
+		$scope.post=function(){myService1.customPOST({},"",{}).then(
+				function(){
+					
+				}
+		);}
+		
+		$scope.addUser=function(){
+				myService1.customPOST(user,"",{}).then(
+				function(){
+					
+				}
+		);}
+		$scope.list=function(){
+			myService1.customGET().then(function(data){
+				console.log(data);
+			});
+		}
+		
+		$scope.testangular=function(){
+			alert("angular work");
+		}
+		
+		$scope.export=function() {
+			$('#tbtoexp').tableExport({type:'excel',escape:'false'});
+	    }
+	  }]);
+
+	
+	</script>
+</html>
+

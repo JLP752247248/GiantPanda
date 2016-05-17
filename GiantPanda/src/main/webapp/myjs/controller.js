@@ -42,6 +42,10 @@ model.controller('TestController',['$scope','$timeout',"myService1","$http", fun
 		});
 	}
 	
+	$scope.testangular=function(){
+		alert("angular work");
+	}
+	
 	$scope.export=function() {
 		$('#tbtoexp').tableExport({type:'excel',escape:'false'});
     }

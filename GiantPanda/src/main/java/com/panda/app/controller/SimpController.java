@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.panda.base.util.JsonUtil;
+import com.panda.base.util.MyLogUtil;
 import com.panda.sys.UserInfoService;
 import com.panda.sys.po.UserInfo;
 
@@ -59,7 +60,6 @@ public class SimpController {
 	public void postUserInfo(@RequestBody @Valid UserInfo userinfo,HttpServletResponse response) throws IOException{
 		//List<TestEntity> list=td.getlist();
 		Serializable s=userServ.saveNewUser(userinfo);
-		
 		JsonUtil.RespondJsonString(response, s);
 	}
 	
@@ -68,6 +68,7 @@ public class SimpController {
 	@RequestMapping(method=RequestMethod.POST)
 	public void postCtrl(@RequestBody @Valid UserInfo user,HttpServletRequest request,HttpServletResponse response) throws IOException{
 		//List<TestEntity> list=td.getlist();
+		MyLogUtil.writeToFile("postCtrl");
 		Serializable id=userServ.saveNewUser(user);
 		JsonUtil.RespondJsonString(response, id);
 	}

@@ -11,10 +11,12 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.panda.base.dao.hibernatecallback.HqlExecuteHibernateCallback;
+import com.panda.base.util.MyLogUtil;
 import com.panda.base.util.PageInfo;
 @Repository
 public class BaseDao<T extends Object,PK extends Serializable> extends HibernateDaoSupport implements Serializable{
@@ -37,7 +39,7 @@ public class BaseDao<T extends Object,PK extends Serializable> extends Hibernate
 	@SuppressWarnings("unchecked")
 	public List<T> getObjectlist(){
 		String Hql="FROM "+getClassTShortName()+" where 1=1";
-		return (List<T>)this.getSession().createQuery(Hql).list();
+		return (List<T>)this.currentSession().createQuery(Hql).list();
 	}
 	
 	/**
@@ -50,7 +52,7 @@ public class BaseDao<T extends Object,PK extends Serializable> extends Hibernate
 		if (id == null)
             return null;
         try {
-        	return (T) this.getSession().get(getClassTName(), id);
+        	return (T) this.currentSession().get(getClassTName(), id);
         } catch (Exception e) {
             log.error(e.getMessage());
             return null;
@@ -64,6 +66,12 @@ public class BaseDao<T extends Object,PK extends Serializable> extends Hibernate
 	 */
 	public Serializable saveNewObject(T o) {
         try {
+        	MyLogUtil.writeToFile("dao");
+        	
+        	
+        	/*会查找spring管理的session，而且是当前线程的session，每个url对应contoller中的一个方法，一直到dao里面，doHibernate里面也是一个独立线程
+        	，都是异步执行的，每个线程可以调用多个service，spring中事务管理可以给每个service方法加上事务，因为session是绑定当前线程的，所以即使是多线
+        	程也是各自获取自己的session，不会互相影响。但是如果一个session*/
         	getHibernateTemplate().persist(o);//如果数据库已经存在，那么会抛出异常
             return 1;// .persist(o);//
         } catch (RuntimeException re) {
@@ -136,7 +144,7 @@ public class BaseDao<T extends Object,PK extends Serializable> extends Hibernate
 	@SuppressWarnings("unchecked")
 	public List<T> listObjectsByHql(String queryString,Object[]values){
 		try{
-			return getHibernateTemplate().find(queryString, values);
+			return (List<T>) getHibernateTemplate().find(queryString, values);
 		}catch(Exception re){
 			log.error("list failed",re);
 			return null;
@@ -146,7 +154,7 @@ public class BaseDao<T extends Object,PK extends Serializable> extends Hibernate
 	@SuppressWarnings("unchecked")
 	public List<Object> listObjectsByHql(String queryString,Object[]values,PageInfo pageInfo){
 		try{
-			return  (List<Object>) getHibernateTemplate().execute(new HqlExecuteHibernateCallback(queryString,values,pageInfo));
+			return  (List<Object>) getHibernateTemplate().execute((HibernateCallback<T>) new HqlExecuteHibernateCallback(queryString,values,pageInfo));
 		}catch(Exception re){
 			log.error("list failed",re);
 			return null;

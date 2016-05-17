@@ -1,0 +1,27 @@
+<html ng-app="myModel">
+<head>
+		
+		<script type="text/javascript" src="/GiantPanda/plugins/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="/GiantPanda/plugins/angular-1.4.0/angular.min.js"></script>
+		<script type="text/javascript" src="/GiantPanda/plugins/restangular-1.4.0/restangular.min.js"></script>
+		<script type="text/javascript" src="/GiantPanda/plugins/lodash.js"></script>
+		<script src="/GiantPanda/plugins/angular-chart/Chart.js"></script>
+		<script src="/GiantPanda/plugins/angular-chart/angular-chart.js"></script>
+		<script type="text/javascript" src="./angularjs/stat.app.js"></script>
+		<script type="text/javascript" src="./angularjs/stat.chart.ctrl.js"></script>
+		<link rel="stylesheet" href="/GiantPanda/plugins/angular-chart/angular-chart.css">
+</head>
+<base href="/" />
+<body>
+	<div ng-controller="ChartController">
+		<canvas id="line" class="chart chart-line" chart-data="chartdata"
+		  chart-legend="true" chart-labels="labels" chart-legend="true" chart-series="series"
+		  chart-click="onClick" ></canvas>
+		  
+		  
+		<!--  <canvas id="bar" class="chart chart-bar"
+		  chart-data="chartdata_bar" chart-labels="labels_bar" chart-series="series_bar">
+		 </canvas> -->
+	</div>
+</body>
+</html>

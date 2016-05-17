@@ -8,8 +8,8 @@
   <url>http://maven.apache.org</url>
   <properties>
  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
- 		<spring.version>3.2.0.RELEASE</spring.version>
- 		<hibernate.version>3.6.8.Final</hibernate.version>
+ 		<spring.version>4.2.1.RELEASE</spring.version>
+ 		<hibernate.version>4.3.0.Final</hibernate.version>
  		<security.version>3.2.0.RELEASE</security.version>
  		<io.netty.version>4.0.23.Final</io.netty.version>
  </properties>
@@ -60,7 +60,7 @@
         </dependency>  
   
   		<!-- spring-security需要的jar包 -->
-  		<dependency>
+  	<dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
       <version>${security.version}</version>
@@ -120,13 +120,13 @@
     <dependency>
 		<groupId>org.springframework</groupId>
 	  	<artifactId>spring-test</artifactId>
-	  	<version>3.2.0.RELEASE</version>
+	  	<version>${spring.version}</version>
 	</dependency>
         <!-- hibernate需要的jar包 -->  
         <dependency>  
             <groupId>org.hibernate</groupId>  
             <artifactId>hibernate-validator</artifactId>  
-            <version>4.1.0.Final</version>  
+            <version>5.0.0.Final</version>  
         </dependency>  
           
         <dependency>  
@@ -319,17 +319,7 @@
 			  <version>5.2.0</version>
 		</dependency>
 		
-		<!-- <dependency>
-		  <groupId>jp.ne.so_net.ga2.no_ji</groupId>
-		  <artifactId>jcom</artifactId>
-		  <version>2.2.1</version>
-		</dependency>
-		<dependency>
-		  <groupId>jp.ne.so_net.ga2.no_ji</groupId>
-		  <artifactId>jcom</artifactId>
-		  <version>2.2.1</version>
-		  <type>dll</type>
-		</dependency> -->
+		
   </dependencies>
   <build>
     <finalName>jlp</finalName>

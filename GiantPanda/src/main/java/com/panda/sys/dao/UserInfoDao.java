@@ -18,7 +18,7 @@ public class UserInfoDao extends BaseDao<UserInfo,String >{
 	private static final long serialVersionUID = 1L;
 	
 public void add(final String id,final String name){
-	getSession().doWork(new Work(){
+	currentSession().doWork(new Work(){
 		@Override
 		public void execute(Connection conn) throws SQLException {
 			String sql="insert into sys_userinfo(userId,userName) values(?,?)";

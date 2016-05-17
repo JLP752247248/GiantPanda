@@ -8,9 +8,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -26,9 +30,21 @@ public class UserInfo implements Serializable{
 
 	@Id
 	@Column(name="USERID")
+	
+	
 	/*@GenericGenerator(name="hibernate-uuid", strategy="uuid")  
     @GeneratedValue(generator="hibernate-uuid")  */
-	private String userId;
+	
+	
+	//table存储模拟序列，有点问题，mysql初始值设置无效，不知道其他数据库有没有用
+	/*@GeneratedValue(strategy=GenerationType.TABLE,generator="seq_user")
+	@TableGenerator( name = "seq_user",pkColumnValue="seq_user",allocationSize=500001,
+	table = "hibernate_sequence", pkColumnName = "seq_name", valueColumnName = "next_val")*/
+	
+	
+	//数据库必须提供主键值，比如mysql自动增长
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int userId;
 	
 	@Column(name="USERNAME")
 	private String userName;
@@ -43,18 +59,16 @@ public class UserInfo implements Serializable{
 	private Collection <GrantedAuthorityImpl> authorities;
 
 	public UserInfo(){
-		
 	}
 	
-	public UserInfo(String userId,String userName){
-		this.userId=userId;
+	public UserInfo(int userId,String userName){
 		this.userName=userName;
-		this.password="";
+		this.password="000000";
 		
 		this.userRoleList=new ArrayList<UserRole>();
 	}
 	
-	UserInfo(String userId,String userName,String password){
+	UserInfo(int userId,String userName,String password){
 		this.userId=userId;
 		this.userName=userName;
 		this.password=password;
@@ -84,10 +98,10 @@ public class UserInfo implements Serializable{
 
 
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

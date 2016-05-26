@@ -6,6 +6,8 @@
 	    http://www.springframework.org/schema/security/spring-security-3.2.xsd"
        default-lazy-init="true">
     <security:http security="none" pattern="/login/login.jsp"/>
+    <security:http security="none" pattern="/bgpics/**"/>
+    <security:http security="none" pattern="/style/**"/>
     <security:http security="none" pattern="/restfulapi/mytest/**"/>
     <security:http auto-config="true" >
         <security:form-login login-page="/login/login.jsp" authentication-failure-url="/login/login.jsp"
@@ -40,7 +42,4 @@
 		<property name="userDetailsService" ref="userDetailsService"></property>
 		<property name="hideUserNotFoundExceptions" value="false"></property>
 	</bean>
-	
-
-
 </beans>

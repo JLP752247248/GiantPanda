@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.panda.sys.po.UserInfo;
-@Component("userDeatils")
+
 public class UserDetailsImpl implements UserDetails{
 
 	/**

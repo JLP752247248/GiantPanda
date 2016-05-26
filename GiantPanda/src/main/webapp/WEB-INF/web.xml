@@ -120,5 +120,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
     <filter-name>openSession</filter-name>  
     <url-pattern>/*</url-pattern>  
   </filter-mapping> 
-  
+  <session-config>  
+         <session-timeout>15 </session-timeout>  
+    </session-config>
 </web-app>

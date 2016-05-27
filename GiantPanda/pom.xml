@@ -8,9 +8,9 @@
   <url>http://maven.apache.org</url>
   <properties>
  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
- 		<spring.version>4.2.1.RELEASE</spring.version>
+ 		<spring.version>4.2.5.RELEASE</spring.version>
  		<hibernate.version>4.3.0.Final</hibernate.version>
- 		<security.version>3.2.0.RELEASE</security.version>
+ 		<security.version>4.1.0.RELEASE</security.version>
  		<io.netty.version>4.0.23.Final</io.netty.version>
  </properties>
   <dependencies>
@@ -277,7 +277,7 @@
 	    	<version>3.14</version>
 	  	</dependency>
 	
-		<dependency> 
+	<!-- 	<dependency> 
 			<groupId>org.apache.poi</groupId>
 	    	<artifactId>poi-scratchpad</artifactId>
 	    	<version>3.14</version>
@@ -294,7 +294,7 @@
 	    	<version>2.1</version>
 	  	</dependency>  
 	  	
-	  	<!-- java操作office（添加水印）-->
+	  	java操作office（添加水印）
 		<dependency>
 			  <groupId>net.sf.jacob-project</groupId>
 			  <artifactId>jacob</artifactId>
@@ -307,7 +307,7 @@
 			  <artifactId>jacob</artifactId>
 			  <version>1.14.3</version>
 		</dependency>
-		<!-- java操作pdf（添加水印） -->
+		java操作pdf（添加水印）
 		<dependency>
 			  <groupId>com.itextpdf</groupId>
 			  <artifactId>itextpdf</artifactId>
@@ -317,7 +317,7 @@
 			  <groupId>com.itextpdf</groupId>
 			  <artifactId>itext-asian</artifactId>
 			  <version>5.2.0</version>
-		</dependency>
+		</dependency> -->
 		
 		
   </dependencies>

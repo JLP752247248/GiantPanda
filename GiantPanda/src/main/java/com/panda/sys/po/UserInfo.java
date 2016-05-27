@@ -8,16 +8,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 
 @Entity
@@ -56,7 +52,7 @@ public class UserInfo implements Serializable{
 	private String password;
 
 	@Transient
-	private Collection <GrantedAuthorityImpl> authorities;
+	private Collection <SimpleGrantedAuthority> authorities;
 
 	public UserInfo(){
 	}
@@ -122,13 +118,13 @@ public class UserInfo implements Serializable{
 		this.password = password;
 	}
 
-	public Collection<GrantedAuthorityImpl> getAuthorities() {
+	public Collection<SimpleGrantedAuthority> getAuthorities() {
 		if(null==authorities)
 			authorities=new HashSet();
 		return authorities;
 	}
 
-	public void setAuthorities(Collection<GrantedAuthorityImpl> authorities) {
+	public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
 	

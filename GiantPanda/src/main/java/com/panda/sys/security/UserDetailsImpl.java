@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import com.panda.sys.po.UserInfo;
 
@@ -17,7 +16,7 @@ public class UserDetailsImpl implements UserDetails{
 	 */
 	String userName;
 	String password;
-	Collection <GrantedAuthorityImpl> authorities=null;
+	Collection <GrantedAuthority> authorities=null;
 	private static final long serialVersionUID = 1L;
 
 	public UserDetailsImpl(String userName,String password){
@@ -28,7 +27,7 @@ public class UserDetailsImpl implements UserDetails{
 		this.userName=user.getUserName();
 		this.password=user.getPassword();
 		this.authorities=new ArrayList();
-		this.authorities.add(new GrantedAuthorityImpl("User"));
+		this.authorities.add(new SimpleGrantedAuthority("User"));
 	}
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

@@ -8,6 +8,7 @@
 <body>
 
 				<form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
+					
 					<div class="login">
 					<h1>Login</h1>
 				<input type="text" name="j_username" placeholder="用户名"value="${SPRING_SECURITY_LAST_USERNAME }">

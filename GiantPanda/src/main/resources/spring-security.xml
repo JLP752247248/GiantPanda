@@ -17,6 +17,7 @@
         <security:http-basic />
         <!-- 增加一个filter，这点与Acegi是不一样的，不能修改默认的filter了，这个filter位于FILTER_SECURITY_INTERCEPTOR之前 -->
       	<security:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="myFilter" />
+      	<security:csrf/>
     </security:http>
 
 	<bean id="myFilter" class="com.panda.sys.security.MyFilterSecurityInterceptor">

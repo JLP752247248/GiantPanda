@@ -6,7 +6,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 
 	<display-name>SpringMVC</display-name>  
   	<welcome-file-list>  
-    	<welcome-file>index.jsp</welcome-file>  
+    	<welcome-file>login/login.jsp</welcome-file>  
   	</welcome-file-list> 
   <!-- 配置Spring -->   
   <context-param>  

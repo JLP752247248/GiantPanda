@@ -8,7 +8,7 @@
 		<a href="${pageContext.request.contextPath}/j_spring_security_logout">logout</a></div>
 		<!-- <div id="menubox" class="menubox">
 		</div> -->
-		<a href="ag-ie.html">ag-ie.html</a>
+		<a href="http://localhost:8880/product-stat/modules/stat/statpage.html?queryName=PROGRAM_DYNAMIC">ag-ie.html</a>
 		<a href="chartsdemo.html">chartsdemo.html</a>
 	</body>
 	

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.panda.base.dao.BaseDao;
 import com.panda.sys.po.UserInfo;
 @Repository
-public class UserInfoDao extends BaseDao<UserInfo,String >{
+public class UserInfoDao extends BaseDao<UserInfo,Integer >{
 
 	/**
 	 * 

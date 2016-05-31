@@ -7,12 +7,15 @@ import org.springframework.security.core.userdetails.AuthenticationUserDetailsSe
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.panda.sys.dao.UserInfoDao;
 import com.panda.sys.po.UserInfo;
 
-@Component("userDetailsService")
+
+
+@Service("userDetailsService")
 public class DaoUserDetailsService implements UserDetailsService,
         AuthenticationUserDetailsService {
 	@Resource
@@ -24,6 +27,8 @@ public class DaoUserDetailsService implements UserDetailsService,
 		return null;
 	}
 
+	@Override
+    @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
 		

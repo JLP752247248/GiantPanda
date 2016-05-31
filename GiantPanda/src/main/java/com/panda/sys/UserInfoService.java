@@ -22,7 +22,7 @@ public class UserInfoService {
 	@Resource
 	UserRoleDao urDao;
 	@Transactional
-	public UserInfo getObjectById(String userId) {
+	public UserInfo getObjectById(int  userId) {
 		return userDao.getObjectById(userId);
 	}
 	@Transactional

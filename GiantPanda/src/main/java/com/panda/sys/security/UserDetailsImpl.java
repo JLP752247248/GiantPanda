@@ -27,7 +27,7 @@ public class UserDetailsImpl implements UserDetails{
 		this.userName=user.getUserName();
 		this.password=user.getPassword();
 		this.authorities=new ArrayList();
-		//this.authorities.add(new SimpleGrantedAuthority("User"));
+		this.authorities.add(new SimpleGrantedAuthority("User"));
 	}
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

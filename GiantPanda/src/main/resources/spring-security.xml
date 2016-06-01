@@ -11,7 +11,7 @@
     <security:http security="none" pattern="/restfulapi/mytest/**"/>
     <security:http>
         <security:form-login login-page="/login/login.jsp"  always-use-default-target="true" 
-                            default-target-url="/login/mainframe1.jsp"  password-parameter="j_password" username-parameter="j_username"/>
+                            default-target-url="/login/mainframe.jsp" />
 		
       
         <security:csrf disabled="true"/>

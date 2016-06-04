@@ -29,7 +29,7 @@ public class SimpController {
 	
 	@RequestMapping(value="/{userId}",method=RequestMethod.GET)
 	//@SetCORNResponseHeader
-	public void testCtrl(@PathVariable String userId,HttpServletResponse response) throws IOException{
+	public void testCtrl(@PathVariable int userId,HttpServletResponse response) throws IOException{
 		//List<TestEntity> list=td.getlist();
 		/*response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "GET");

@@ -96,7 +96,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
   </servlet-mapping>
   <servlet-mapping>  
     <servlet-name>springMVC</servlet-name>  
-    <url-pattern>/restfulapi/*</url-pattern>  
+    <url-pattern>/service/*</url-pattern>  
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ExportToExcel</servlet-name>

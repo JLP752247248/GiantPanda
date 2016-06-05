@@ -1,5 +1,7 @@
 package com.panda.sys.security;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.security.core.Authentication;
@@ -29,11 +31,15 @@ public class DaoUserDetailsService implements UserDetailsService,
 
 	@Override
     @Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String userName)
+	public UserDetails loadUserByUsername(String loginName)
 			throws UsernameNotFoundException {
-		
-		UserInfo user=userInfoDao.listObjectsByHql("from UserInfo where userName = ?", new String[]{userName}).get(0);
+		List<UserInfo> list=userInfoDao.listObjectsByHql("from UserInfo where userName = ? or telephone=? or mailAdd=?", new Object[]{loginName,loginName,loginName});
+		if(null==list || list.size()==0){
+			throw new RuntimeException("您输入的用户"+loginName+"不存在！");
+		}
+		else {
+		UserInfo user=list.get(0);
 		return new UserDetailsImpl(user);
-		
+		}
 	}
 }

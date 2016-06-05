@@ -5,14 +5,14 @@
 	    http://www.springframework.org/schema/security
 	    http://www.springframework.org/schema/security/spring-security-4.1.xsd"
        default-lazy-init="true">
-    <security:http security="none" pattern="/login/login.jsp"/>
-    <security:http security="none" pattern="/bgpics/**"/>
-    <security:http security="none" pattern="/style/**"/>
-    <security:http security="none" pattern="/restfulapi/mytest/**"/>
+    <security:http security="none" pattern="/login/*"/>
+    <security:http security="none" pattern="/ui/**"/>
+    <security:http security="none" pattern="/plugins/**"/>
+    <security:http security="none" pattern="/service/**"/>
     <security:http>
         <security:form-login login-page="/login/login.jsp"  always-use-default-target="true" 
-                            default-target-url="/login/mainframe.jsp" />
-		
+                            default-target-url="/page/mainpage/mainpage.jsp" />
+		<security:logout logout-success-url="/login"/>
       
         <security:csrf disabled="true"/>
         <!-- 增加一个filter，这点与Acegi是不一样的，不能修改默认的filter了，这个filter位于FILTER_SECURITY_INTERCEPTOR之前 -->
@@ -27,6 +27,14 @@
 	</bean>
     
 
+	<bean id="messageSource"
+    		class="org.springframework.context.support.ResourceBundleMessageSource">
+			<property name="basenames">
+		        <list>
+		        <value>mymsgsource</value>
+		        </list>
+	    	</property>
+	</bean>
     <!-- id = centitAccessDecisionManagerBean 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 源文件路径 com.centit.sys.security.DaoAccessDecisionManager -->
     <!-- id = centitSecurityMetadataSource 资源源数据定义，即定义某一资源可以被哪些角色访问 源文件路径 com.centit.sys.security.DaoInvocationSecurityMetadataSource -->
     <!-- id = userDetailsService认证管理数据提供， com.centit.sys.security.userdetails.DaoUserDetailsService -->

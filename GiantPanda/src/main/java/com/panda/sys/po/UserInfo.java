@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,6 +66,11 @@ public class UserInfo implements Serializable{
 	@Transient
 	private Collection <SimpleGrantedAuthority> authorities;
 
+	
+	@OneToMany(mappedBy="userInfo",cascade={CascadeType.ALL},orphanRemoval=true,fetch=FetchType.LAZY)
+	private List<Article> articles;
+	
+	
 	public UserInfo(){
 	}
 	

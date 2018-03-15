@@ -6,6 +6,11 @@ public class JavaData {
 
 	@Test
 	public void testDataType(){
+		int i=0,j=0;
+		System.out.println(i++);
+		System.out.println(i++==2);
+		System.out.println(++j);
+		System.out.println(++j==2);
 		System.out.println(0x0021);
 		System.out.println(0x9990);
 		System.out.println((long)Math.pow(2, 31));//2147483648

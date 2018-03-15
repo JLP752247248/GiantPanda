@@ -199,7 +199,12 @@
         </dependency>  
   
        
-  
+  		<!-- axis1 client -->
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+		</dependency>
         <!-- 文件上传需要的jar包 -->  
         <dependency>  
             <groupId>commons-fileupload</groupId>  
